@@ -4,7 +4,7 @@
 
 <div align="center">
 
-###  A Universal Interface for Quantum Materials Calculations
+### Integrating deep learning into first-principles calculations
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![Python 3.13](https://img.shields.io/badge/python-3.13-blue.svg)](https://www.python.org/)
