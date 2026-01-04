@@ -77,23 +77,6 @@ Commands:
   ls       List all available commands.
 ```
 
-### Auto-Completion
-
-Enable command auto-completion to save time and reduce errors:
-
-```bash
-# Bash
-alias 'uv-act-deeph'='source ${HOME}/.uvenv/deeph/bin/activate ; eval "$(_DOCK_COMPLETE=bash_source dock)"'
-
-# Zsh
-alias 'uv-act-deeph'='source ${HOME}/.uvenv/deeph/bin/activate ; eval "$(_DOCK_COMPLETE=zsh_source dock)"'
-
-# Fish
-alias 'uv-act-deeph'='source ${HOME}/.uvenv/deeph/bin/activate ; _DOCK_COMPLETE=fish_source dock | source'
-```
-
-Add the corresponding line to your shell config file (`~/.bashrc`, `~/.zshrc`, or `~/.config/fish/completions/dock.fish`) for permanent setup. After reloading your shell, use `Tab` to auto-complete commands, options, and file paths.
-
 ## Project Architecture
 
 DeepH-dock is structured as a modular system with clearly defined functional responsibilities:
@@ -171,24 +154,14 @@ dock convert fhi-aims my-func
 
 The command's usage (arguments, options, help text) is entirely defined by the `click` decorators specified in `cli_args`. Please refer to the [official click documentation](https://click.palletsprojects.com/) for details on defining arguments and options.
 
-### Fork and Pull Request Process
-
-Once you've implemented your feature following the workflow above, please submit your changes via a pull request:
-
-1. Fork this repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-Please ensure new code includes appropriate tests and follows the existing code style.
+For additional details, refer to the [Development Guide](https://deeph-dock.readthedocs.io/en/latest/for_developers/development_guide.html).
 
 ## Citation
 
 If you use this platform, please cite:
 
-```bibtex
-@software{deephdock2025, TODO}
+```bash
+TBA
 ```
 
 ## License
@@ -197,9 +170,9 @@ This project is licensed under the GPL 3.0 License - see the [LICENSE](LICENSE) 
 
 ## Support & Contact
 
-- 📖 **Documentation**: [Documentation Link]
-- 🐛 **Issue Reporting**: [GitHub Issues]
-- 💬 **Discussions**: [GitHub Discussions]
+- 📖 **Documentation**: [Documentation Link](https://deeph-dock.readthedocs.io)
+- 🐛 **Issue Reporting**: [GitHub Issues](https://github.com/kYangLi/DeepH-dock/issues)
+<!-- - 💬 **Discussions**: [GitHub Discussions]() -->
 
 ---
 
