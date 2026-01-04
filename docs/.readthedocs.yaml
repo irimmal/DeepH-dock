@@ -9,8 +9,9 @@ build:
     os: ubuntu-24.04
     tools:
         python: "3.13"
-    pre_build:
-        - pip install ".[docs]"
+    jobs:
+        pre_build:
+            - pip install ".[docs]"
     commands:
         - cd docs
         - rm -r capabilities/
