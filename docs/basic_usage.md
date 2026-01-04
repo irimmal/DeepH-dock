@@ -131,7 +131,7 @@ twist_2d.write_res_to_poscar("twisted_bilayer.vasp")
 
 ### Building Workflows Like LEGO® Bricks
 
-DeepH-dock is built with a modular architecture, allowing you to easily combine different functions like LEGO® bricks to construct complex and customized workflows.
+DeepH-dock is built with a modular architecture, allowing you to easily combine different functions brick by brick to construct complex and customized workflows.
 
 ```python
 # Convert data using the convert module
@@ -150,13 +150,11 @@ dist.plot()
 
 ## 3. Learning Through Examples
 
-The best way to learn DeepH-dock is through practical examples. Visit the `examples/` directory or the [Capabilities](./capabilities/index.rst) in the repository for Jupyter notebooks demonstrating various use cases:
+The best way to learn DeepH-dock is through practical examples. Visit the [`examples/`](https://github.com/kYangLi/DeepH-dock/tree/main/examples) directory or the [Capabilities](./capabilities/index.rst) in the repository for Jupyter notebooks demonstrating various use cases:
 
 - **Basic workflows** - Getting started with common tasks
 - **Advanced analyses** - Complex data processing and visualization
 - **Integration patterns** - Combining DeepH-dock with other tools
-
-These notebooks are executed as part of our CI/CD pipeline, ensuring they remain up-to-date and functional. When contributing new features, we encourage adding corresponding example notebooks that demonstrate usage and serve as functional tests (see the [Documentation with Jupyter Notebooks, Development Guide](./for_developers/development_guide.md#documentation-with-jupyter-notebooks)).
 
 ## 4. Extending DeepH-dock
 
@@ -173,6 +171,6 @@ The framework makes it straightforward to add new functionality that automatical
 ## Need Help?
 
 - Use `dock [module] --help` for command-specific assistance
-- Check the `examples/` directory for practical implementations
+- Check the [`examples/`](https://github.com/kYangLi/DeepH-dock/tree/main/examples) directory for practical implementations
 - For development questions, see the [For Developers](./for_developers/index.rst) section
 - Browse the [Capabilities](./capabilities/index.rst) section for an overview of all available functionality

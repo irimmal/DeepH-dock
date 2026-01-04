@@ -156,11 +156,13 @@ By following this registration pattern, your module will seamlessly integrate wi
 
 ## Documentation with Jupyter Notebooks
 
-We strongly encourage contributors to include Jupyter notebook examples for new features. These notebooks serve multiple purposes:
+We strongly encourage contributors to include Jupyter notebook in [`examples/`](https://github.com/kYangLi/DeepH-dock/tree/main/examples) for new features. These notebooks serve multiple purposes:
 
-1. **Live Documentation**: Demonstrate how to use your module in real-world scenarios.
+1. **Live Documentation**: All Jupyter notebook (`.ipynb`) files are automatically converted into live documentation.
 2. **Functional Tests**: Validate that your implementation works as expected.
 3. **Educational Resources**: Help users understand the capabilities and best practices.
+
+These notebooks are executed as part of our CI/CD pipeline, ensuring they remain up-to-date and functional. When contributing new features, we encourage adding corresponding example notebooks that demonstrate usage and serve as functional tests (see the [Documentation with Jupyter Notebooks, Development Guide](./for_developers/development_guide.md#documentation-with-jupyter-notebooks)).
 
 ### Notebook Requirements
 

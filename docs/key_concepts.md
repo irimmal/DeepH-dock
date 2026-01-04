@@ -1,6 +1,6 @@
 # Key Concepts
 
-This section describes the core data formats used by the DeepH project for electronic structure calculations and materials modeling. In the latest version of [DeepH-pack](http://www.deeph-pack.com), we have adopted a new folder layout that is more lightweight, user-friendly, and optimized for high I/O throughput.
+This section describes the core data formats used by the DeepH project for electronic structure calculations and materials modeling. In the latest version of [DeepH-pack](https://ticket.deeph-pack.com), we have adopted a new folder layout that is more lightweight, user-friendly, and optimized for high I/O throughput.
 
 ## Overview
 
@@ -14,11 +14,11 @@ dft
   │   ├── POSCAR
   │   ├── info.json
   │   ├── overlap.h5
-  │   ├── hamiltonian.h5 (optional)
-  │   ├── density_matrix.h5 (optional)
-  │   ├── potential_r.h5 (optional)
-  │   ├── charge_density.h5 (optional)
-  │   ├── force.h5 (optional)
+  │   ├── hamiltonian.h5     (optional)
+  │   ├── density_matrix.h5  (optional)
+  │   ├── potential_r.h5     (optional)
+  │   ├── charge_density.h5  (optional)
+  │   ├── force.h5           (optional)
   │   └── ...
   ├── 1
   └── ...
@@ -26,8 +26,8 @@ dft
 
 ### File Descriptions
 
-* The root directory for all DFT raw data **must** be named `dft/`.
-* Subfolders inside (e.g., `0`, `1`, `structure_001`) can use free-form labels or numerical indices.
+* The root directory for all DFT raw data is named `dft/`.
+* Subfolders inside (e.g., `0`, `1`, or `structure_001`) can use free-form labels or numerical indices.
 
 | File Type | Status | Format | Description |
 | :--- | :--- | :--- | :--- |
@@ -39,14 +39,6 @@ dft
 | `potential_r.h5` | Optional | HDF5 | Real-space potential matrix |
 | `charge_density.h5` | Optional | HDF5 | Charge density matrix |
 | `force.h5` | Optional | HDF5 | Atomic forces |
-
-## Converting from Legacy Format
-
-Convert legacy `DeepH-E3` data to current format:
-
-```bash
-dock convert deeph upgrade <legacy> <updated> -p PARALLEL_NUM
-```
 
 ## File Types and Their Purposes
 
@@ -123,16 +115,16 @@ Each HDF5 file contains the following keys:
 
 | Key | Shape | Description |
 | ----- | ------- | ------------- |
-| `atom_pairs` | (N, 5) | Integer matrix where N is the number of edges. Each row contains: `[Ri, Rj, Rk, atom_1_index, atom_2_index]` defining which supercell the atom pair belongs to |
+| `atom_pairs` | (N, 5) | Integer matrix where N is the number of edges. Each row contains: `[R1, R2, R3, i_atom, j_atom]` defining which supercell the atom pair belongs to |
 | `chunk_boundaries` | (N+1,) | 1D integer array marking boundaries for each edge's data in the entries array |
 | `chunk_shapes` | (N, 2) | Integer matrix where each row gives the shape of the submatrix for the corresponding edge |
 | `entries` | (M,) | Flattened 1D array of floating-point values containing all matrix elements |
 
 1. **`atom_pairs`**
    * Shape: `N_edge × 5` array
-   * Stores edges/"hoppings" in format `[R1, R2, R3, i, j]`
+   * Stores edges/"hoppings" in format `[R1, R2, R3, i_atom, j_atom]`
    * `R1, R2, R3`: Relative lattice shift along three lattice vectors
-   * `i, j`: Index of start/end atoms (0-indexed, matches `POSCAR` order)
+   * `i_atom, j_atom`: Index of start/end atoms (0-indexed, matches `POSCAR` order)
 
 2. **`entries`**
    * 1-D array containing all matrix elements for edges in `atom_pairs`
@@ -271,4 +263,4 @@ Understanding these formats is crucial for working with DeepH-dock:
 2. **Processing**: DeepH modules operate on the data using these consistent representations
 3. **Output**: Results are stored in the same formats for interoperability
 
-For more detailed specifications and updates to these formats, please refer to the latest documentation and the `examples/` directory in the repository.
+For more detailed specifications and updates to these formats, please refer to the latest documentation and the [`examples/`](https://github.com/kYangLi/DeepH-dock/tree/main/examples) directory in the repository.
