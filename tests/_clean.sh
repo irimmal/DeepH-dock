@@ -19,6 +19,8 @@ for test_dir in ${test_dirs[@]}; do
             continue
         elif [[ "$d1" == *.ipynb ]]; then
             continue
+        elif [[ "$d1" == *install ]]; then
+            continue
         else
             read -p "rm -r ${test_dir}/${d1} ? [y/N]" REPLY
             if [[ "$REPLY" == "y" ]]; then

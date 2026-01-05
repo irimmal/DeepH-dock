@@ -28,6 +28,14 @@ def set_environ(thread_num):
             help='The parallel processing number, -1 for using all of the cores.'
         ),
         click.option(
+            "--thread-num", type=int, default=1,
+            help='Number of threads for each k-point.'
+        ),
+        click.option(
+            "--sparse-calc", is_flag=True,
+            help="Use sparse diagonalization."
+        ),
+        click.option(
             "--num-band", type=int, default=50,
             help="Number of bands when using sparse diagonalization."
         ),
@@ -38,14 +46,6 @@ def set_environ(thread_num):
         click.option(
             "--maxiter", type=int, default=300,
             help="Max number of iterations when using sparse diagonalization."
-        ),
-        click.option(
-            "--sparse-calc", is_flag=True,
-            help="Use sparse diagonalization."
-        ),
-        click.option(
-            "--thread-num", type=int, default=1,
-            help='Number of threads for each k-point.'
         ),
     ],
 )
