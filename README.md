@@ -18,6 +18,8 @@
 
 At the core of DeepH-dock is **a unified and flexible interface layer that seamlessly connects mainstream DFT packages with the DeepH workflow**, enabling users to generate and utilize deep learning-based Hamiltonians with minimal effort. DeepH-dock offers first-class support for heterogeneous computational environments, allowing researchers to orchestrate complex multi-software workflows through a consistent Python API. Designed to significantly lower the technical barrier and enhance reproducibility in large-scale quantum materials simulations, `DeepH-dock` is the product of extensive refinement driven by real-world research needs.
 
+For the most comprehensive usage documentation, please visit [https://deeph-dock.readthedocs.io/en/latest/](https://deeph-dock.readthedocs.io/en/latest/).
+
 ## Core Features
 
 **🧬 Multi-Software Compatibility:** Seamlessly bridges major DFT packages (e.g., SIESTA, QE, OpenMX, FHI-aims, ABACUS) with the DeepH deep learning family and downstream tight-binding toolchains.
