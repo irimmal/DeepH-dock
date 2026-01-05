@@ -3,7 +3,7 @@ DeepH-dock
 
 .. div:: sd-text-left sd-font-italic
 
-    *Modular, extensible bridge between first-principles calculations and DeepH method*
+    *Modular, extensible bridge between first-principles calculations and the DeepH method*
 
 
 ----
