@@ -8,7 +8,7 @@ from deepx_dock._cli.registry import register
     cli_name="how-to-install-petsc",
     cli_help="Create PETSc installation template directory",
     cli_args=[
-        click.argument('target_dir', type=click.Path(),),
+        click.argument('target_dir', type=click.Path(path_type=Path)),
         click.option(
             '--force', is_flag=True,
             help='Force overwrite if target directory already contains files.'

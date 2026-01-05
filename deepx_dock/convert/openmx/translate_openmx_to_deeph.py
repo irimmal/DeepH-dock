@@ -89,6 +89,75 @@ def convert_orbital_string_to_list(s):
     return result
 
 class OpenMXDatasetTranslator:
+    """
+    Translator for converting OpenMX calculation outputs to DeepH training data format.
+    
+    This class facilitates the conversion of electronic structure data computed by OpenMX
+    into the standardized format required by DeepH for machine learning model training.
+    The converter supports selective export of different components of the Hamiltonian 
+    and density matrices, enabling flexible data preparation for various training scenarios.
+    
+    Args:
+        openmx_data_dir (str): 
+            Path to the directory containing OpenMX calculation outputs. The directory 
+            should be organized with subdirectories for each material structure, 
+            each containing the necessary OpenMX output files (e.g., openmx.scfout).
+        
+        deeph_data_dir (str):
+            Path to the output directory where DeepH-formatted data will be stored.
+        
+        export_S (bool, optional):
+            Whether to export overlap matrices (S). Default: True.
+            Required for non-orthogonal basis set transformations.
+        
+        export_H (bool, optional):
+            Whether to export Hamiltonian matrices (H). Default: True.
+            Essential for training models that predict electronic Hamiltonian.
+        
+        export_rho (bool, optional):
+            Whether to export density matrices (ρ). Default: False.
+            Useful for training models that predict electron density.
+        
+        export_r (bool, optional):
+            Whether to export position matrices (R). Default: False.
+            Required for models that consider spatial coordinates explicitly.
+        
+        n_jobs (int, optional):
+            Number of parallel jobs for data processing. Default: 1 (sequential).
+            Use -1 to utilize all available CPU cores.
+        
+        n_tier (int, optional):
+            Number of neighbor tiers to consider in the Hamiltonian. Default: 0.
+            Higher values include longer-range interactions (0: nearest neighbors only).
+    
+    Examples:
+        ``` python
+        translator = OpenMXDatasetTranslator(
+            openmx_data_dir="./openmx_outputs",
+            deeph_data_dir="./deeph_training_data",
+            export_S=True,
+            export_H=True,
+            export_rho=False,
+            n_jobs=4
+        )
+        translator.transfer_all_openmx_to_deeph()  # Start conversion process
+        ```
+    
+    Notes:
+        - The OpenMX data directory should follow the structure convention:
+            openmx_data_dir/
+                structure_1/
+                    openmx.scfout
+                    other_output_files...
+                structure_2/
+                    ...
+        - Conversion performance scales with n_jobs, but memory usage increases proportionally.
+        - Setting n_tier > 0 requires corresponding OpenMX calculations with appropriate interaction ranges.
+    
+    See Also:
+        DeepH documentation: https://deeph.readthedocs.io/
+        OpenMX documentation: https://www.openmx-square.org/
+    """
     def __init__(self,
         openmx_data_dir, deeph_data_dir,
         export_S=True, export_H=True, export_rho=False, export_r=False,
