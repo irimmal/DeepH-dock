@@ -2,9 +2,9 @@ from itertools import chain
 import numpy as np
 from scipy.spatial import KDTree
 
-from deepx_dock.hpro.utils.misc import atom_number2name
-from deepx_dock.hpro.utils.supercell import minimum_supercell
-from deepx_dock.hpro.matao.matao import PairsInfo
+from HPRO.utils.misc import atom_number2name
+from HPRO.utils.supercell import minimum_supercell
+from HPRO.matao.matao import PairsInfo
 
 
 def pairs_within_cutoff(structure1, cutoffs1, structure2=None, cutoffs2=None):

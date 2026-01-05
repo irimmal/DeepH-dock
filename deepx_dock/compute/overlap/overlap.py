@@ -1,18 +1,19 @@
 import numpy as np
 
 from deepx_dock.compute.overlap.findpairs import pairs_within_cutoff
-from deepx_dock.hpro.v2h.twocenter import TwoCenterIntgSplines
-from deepx_dock.hpro.utils.misc import slice_same
-from deepx_dock.hpro.from_gpaw.gaunt import gaunt
-from deepx_dock.hpro.matao.matao import MatAO
+from HPRO.v2h.twocenter import TwoCenterIntgSplines
+from HPRO.utils.misc import slice_same
+from HPRO.from_gpaw.gaunt import gaunt
+from HPRO.matao.matao import MatAO
 
 
-def calc_overlap(aodata1, aodata2=None, Ecut=50):
+def calc_overlap(aodata1, aodata2=None, Ecut=100, kind=1):
     '''
     Calculate the overlap matrices.
 
     Parameters:
         Ecut: cutoff energy of radial grid in reciprocal space, in Hartree
+        kind: 1 - overlap; 2 - kinetic matrix element
     '''
 
     is_selfolp = aodata2 is None
@@ -54,7 +55,7 @@ def calc_overlap(aodata1, aodata2=None, Ecut=50):
                     rcut = r1 + r2
                     tic_splines = TwoCenterIntgSplines(aodata1.phiQlist_spc[spc1][iorb],
                                                        aodata2.phiQlist_spc[spc2][jorb],
-                                                       rcut, kind=1,
+                                                       rcut, kind=kind,
                                                        GLLL=GLLL)
                     orbpairs_thisij.append(tic_splines)
             orbpairs[(spc1, spc2)] = orbpairs_thisij
