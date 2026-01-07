@@ -135,7 +135,7 @@ You can also integrate DeepH-dock directly into your Python scripts. The followi
 Citation
 ^^^^^^^^
 
-If you use this code in your academic work, please cite **the complete package featuring the latest implementation, methodology, and workflow of `DeepH <https://github.com/kYangLi/DeepH-pack-docs>`_**:
+If you use this code in your academic work, please cite the complete package featuring the latest implementation, methodology, and workflow of `DeepH <https://github.com/kYangLi/DeepH-pack-docs>`_:
 
 `Yang Li, Yanzhen Wang, Boheng Zhao, et al. DeepH-pack: A general-purpose neural network package for deep-learning electronic structure calculations. arXiv:2601.02938 (2026) <https://cmt-deeph-download-1311443801.cos.accelerate.myqcloud.com/DeepH-pack-2026.pdf>`_
 
