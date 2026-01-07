@@ -135,17 +135,18 @@ You can also integrate DeepH-dock directly into your Python scripts. The followi
 Citation
 ^^^^^^^^
 
-`Li, Y., Wang, Y., Zhao, B., et al. DeepH-pack: A general-purpose neural network package for deep-learning electronic structure calculations. arXiv. (2026) (Submitted) <https://cmt-deeph-download-1311443801.cos.accelerate.myqcloud.com/DeepH-pack-2026.pdf>`_
+If you use this code in your academic work, please cite **the complete package featuring the latest implementation, methodology, and workflow of `DeepH <https://github.com/kYangLi/DeepH-pack-docs>`_**:
 
-.. .. code-block:: bash
+`Yang Li, Yanzhen Wang, Boheng Zhao, *et al*. DeepH-pack: A general-purpose neural network package for deep-learning electronic structure calculations. arXiv:2601.02938 (2026) <https://cmt-deeph-download-1311443801.cos.accelerate.myqcloud.com/DeepH-pack-2026.pdf>`_
 
-..     @article{li2026deeph-pack,
-..         title={DeepH-pack: A general-purpose neural network package for deep-learning electronic structure calculations},
-..         author={Yang Li, Yanzhen Wang, Boheng Zhao, Xiaoxun Gong, Yuxiang Wang, Zechen Tang, Zixu Wang, Zilong Yuan, Jialin Li, Minghui Sun, Zezhou Chen, Honggeng Tao, Baochun Wu, Yuhang Yu, He Li, Felipe H. da Jornada, Wenhui Duan, and Yong Xu},
-..         journal={arXiv},
-..         volume={Submitted...},
-..         year={2026}
-..     }
+.. code-block:: bibtex
+
+    @article{li2026deephpack,
+        title={DeepH-pack: A general-purpose neural network package for deep-learning electronic structure calculations},
+        author={Li, Yang and Wang, Yanzhen and Zhao, Boheng and Gong, Xiaoxun and Wang, Yuxiang Tang, Zechen and Wang, Zixu and Yuan, Zilong and Li, Jialin and Sun, Minghui and Chen, Zezhou and Tao, Honggeng and Wu, Baochun and Yu, Yuhang and Li, He and da Jornada, Felipe H. and Duan, Wenhui and Xu, Yong },
+        journal={arXiv preprint arXiv:2601.02938},
+        year={2026}
+    }
 
 
 ----
