@@ -19,7 +19,7 @@
 
 At the core of *DeepH-dock* is **a unified and flexible interface layer that seamlessly connects mainstream DFT packages with the DeepH workflow**, enabling users to generate and utilize deep learning-based Hamiltonians with minimal effort. DeepH-dock offers first-class support for heterogeneous computational environments, allowing researchers to orchestrate complex multi-software workflows through a consistent Python API.
 
-*DeepH-dock* also defines a unified data format for machine-learning materials science applications that can be efficiently adopted for machine learning force field and deep learning electronic structure implementations. please refer to [our documentation](https://deeph-dock.readthedocs.io/en/latest/key_concepts.html) for more details.
+*DeepH-dock* establishes a unified data format tailored for machine learning in materials science, facilitating efficient implementations of both force fields and electronic structure methods. please refer to [our documentation](https://deeph-dock.readthedocs.io/en/latest/key_concepts.html) for more details.
 
 For the most comprehensive usage documentation, please visit [https://deeph-dock.readthedocs.io](https://deeph-dock.readthedocs.io).
 
