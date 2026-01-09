@@ -416,7 +416,7 @@ class PySCFDataHooker:
         # get Rijk
         # TODO: rcut for each atom
         # but in pyscf, only support one rcut for all atoms
-        if self.rcut == None:
+        if self.rcut is None:
                 self.cell.use_loose_rcut = True
                 self.cell.build()
                 self.rcut = self.cell.rcut * BOHR_TO_ANGSTROM
