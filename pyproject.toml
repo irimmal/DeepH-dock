@@ -37,6 +37,7 @@ dependencies = [
     "click",
     "ase",
     "mpi4py",
+    "pyscf",
 ]
 
 [project.optional-dependencies]
