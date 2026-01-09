@@ -37,7 +37,6 @@ dependencies = [
     "click",
     "ase",
     "mpi4py",
-    "pyscf",
 ]
 
 [project.optional-dependencies]
@@ -60,6 +59,10 @@ docs = [
     "sphinx-design",
     "jupytext",
     "docutils",
+]
+
+pyscf = [
+    "pyscf",
 ]
 
 
