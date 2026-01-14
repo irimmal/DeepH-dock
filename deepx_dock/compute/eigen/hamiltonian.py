@@ -14,7 +14,7 @@ from deepx_dock.CONSTANT import DEEPX_POSCAR_FILENAME
 from deepx_dock.CONSTANT import DEEPX_INFO_FILENAME
 from deepx_dock.CONSTANT import DEEPX_OVERLAP_FILENAME
 from deepx_dock.CONSTANT import DEEPX_HAMILTONIAN_FILENAME
-
+from deepx_dock.compute.eigen.matrix import AOMatrixR, AOMatrixK
 
 class HamiltonianObj:
     """
@@ -57,11 +57,26 @@ class HamiltonianObj:
     def __init__(self, info_dir_path, H_file_path=None):
         self._get_necessary_data_path(info_dir_path, H_file_path)
         #
-        self.Rijk_list = None
-        self.SR = None
-        self.HR = None
+        self.mat_S = None
+        self.mat_H = None
         #
         self.parse_data()
+
+    @property
+    def Rijk_list(self):
+        return self.mat_S.Rs if self.mat_S is not None else None
+
+    @property
+    def SR(self):
+        return self.mat_S.MRs if self.mat_S is not None else None
+
+    @property
+    def HR(self):
+        return self.mat_H.MRs if self.mat_H is not None else None
+    
+    @property
+    def R_quantity(self):
+        return len(self.mat_S.Rs) if self.mat_S is not None else 0
 
     def _get_necessary_data_path(self,
         info_dir_path: str | Path, H_file_path: str | Path | None = None
@@ -136,21 +151,22 @@ class HamiltonianObj:
             )
             S_R[Rijk][_i_slice, _j_slice] = _S_chunk
         #
-        self.R_quantity = len(S_R)
-        self.Rijk_list = np.zeros((self.R_quantity, 3), dtype=int)
-        self.SR = np.zeros(
-            (self.R_quantity, self.orbits_quantity, self.orbits_quantity),
+        R_quantity = len(S_R)
+        Rijk_list = np.zeros((R_quantity, 3), dtype=int)
+        SR = np.zeros(
+            (R_quantity, self.orbits_quantity, self.orbits_quantity),
             dtype=np.float64
         )
         for i_R, (Rijk, S_val) in enumerate(S_R.items()):
-            self.Rijk_list[i_R] = Rijk
-            self.SR[i_R] = S_val
+            Rijk_list[i_R] = Rijk
+            SR[i_R] = S_val
         #
         if self.spinful:
-            _zeros_S = np.zeros_like(self.SR)
-            self.SR = np.block(
-                [[self.SR, _zeros_S], [_zeros_S, self.SR]]
+            _zeros_S = np.zeros_like(SR)
+            SR = np.block(
+                [[SR, _zeros_S], [_zeros_S, SR]]
             )
+        self.mat_S = AOMatrixR(Rijk_list, SR)
     
     def _parse_hamiltonian(self):
         H_R = {}
@@ -159,7 +175,8 @@ class HamiltonianObj:
             self._read_h5(self.HR_path, dtype=dtype)
         assert np.array_equal(self.atom_pairs, atom_pairs), "The atom pairs is not the same."
         bands_quantity = self.orbits_quantity * (1 + self.spinful)
-        _matrix_shape = (self.R_quantity, bands_quantity, bands_quantity)
+        R_quantity = self.R_quantity
+        _matrix_shape = (R_quantity, bands_quantity, bands_quantity)
         for i_ap, ap in enumerate(atom_pairs):
             # Gen Data
             R_ijk = (ap[0], ap[1], ap[2])
@@ -212,11 +229,12 @@ class HamiltonianObj:
                 H_R[R_ijk][_i_slice, _j_slice] = _H_chunk
         #
         assert self.Rijk_list is not None, "You must read in the overlaps first!"
-        assert self.R_quantity == len(H_R), f"The overlap R quantity `{self.R_quantity}` is not agree with the hamiltonian `{len(H_R)}`."
-        self.HR = np.zeros(_matrix_shape, dtype=dtype)
-        for i_R in range(self.R_quantity):
+        assert R_quantity == len(H_R), f"The overlap R quantity `{R_quantity}` is not agree with the hamiltonian `{len(H_R)}`."
+        HR = np.zeros(_matrix_shape, dtype=dtype)
+        for i_R in range(R_quantity):
             R_ijk = self.Rijk_list[i_R]
-            self.HR[i_R] = H_R[tuple(R_ijk)]
+            HR[i_R] = H_R[tuple(R_ijk)]
+        self.mat_H = AOMatrixR(self.Rijk_list, HR)
 
     @staticmethod
     def get_reciprocal_lattice(lattice):
@@ -260,26 +278,22 @@ class HamiltonianObj:
             "frac_coords": result["frac_coords"],
         }
     
-    @staticmethod
-    def _ft(k, Rs, MRs):
-        phase = np.exp(2j * np.pi * np.dot(Rs, k))
-        Mk = np.sum(phase[:, None, None] * MRs, axis=0)
-        return Mk
-    
-    @staticmethod
-    def _ift(R, ks, Mks):
-        phase = np.exp(-2j * np.pi * np.dot(ks, R))
-        MR = np.sum(phase[:, None, None] * Mks, axis=0) / len(ks)
-        return MR
-    
-    @staticmethod
-    def _Sk_and_Hk(k, Rijk_list, SR, HR):
-        Sk = HamiltonianObj._ft(k, Rijk_list, SR)
-        Hk = HamiltonianObj._ft(k, Rijk_list, HR)
-        return Sk, Hk
-
     def Sk_and_Hk(self, k):
-        return self._Sk_and_Hk(k, self.Rijk_list, self.SR, self.HR)
+        # Support batch k or single k.
+        # k: (3,) or (Nk, 3)
+        if k.ndim == 1:
+            ks = k[None, :]
+            squeeze = True
+        else:
+            ks = k
+            squeeze = False
+            
+        Sk = self.mat_S.r2k(ks)
+        Hk = self.mat_H.r2k(ks)
+        
+        if squeeze:
+            return Sk[0], Hk[0]
+        return Sk, Hk
 
     def diag(self, ks, k_process_num=1, thread_num=None, sparse_calc=False, bands_only=False, **kwargs):
         """
@@ -317,15 +331,14 @@ class HamiltonianObj:
             Shape: (Norb, Nband, Nk)
         """
 
-        # Reference to the calculation method to avoid full object pickling overhead if possible
-        calc_func = self._Sk_and_Hk 
-        R_list = self.Rijk_list
-        SR = self.SR
-        HR = self.HR
+        mat_S = self.mat_S
+        mat_H = self.mat_H
 
         def process_k(k):
             # Hk, Sk: (Norb, Norb)
-            Sk, Hk = calc_func(k, R_list, SR, HR)
+            # Use vectorized r2k for single k (1, 3) -> (1, Norb, Norb) -> (Norb, Norb)
+            Sk = mat_S.r2k(k[None, :])[0]
+            Hk = mat_H.r2k(k[None, :])[0]
             
             if sparse_calc:
                 if bands_only:
