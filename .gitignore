@@ -4,6 +4,7 @@
 /deepx_dock/io/HopCP/pkg/PETSc/downloads
 /deepx_dock/io/HopCP/pkg/PETSc/install
 /.vscode
+/docs/capabilities
 
 # Prerequisites
 *.d
