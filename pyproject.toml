@@ -5,11 +5,9 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "deepx-dock"
-version = "0.9.6"
+version = "0.9.6.post1"
 authors = [
-    {name = "Whenhui Duan", email = "duanw@tsinghua.com"},
-    {name = "Yong Xu", email = "yongxu@tsinghua.com"},
-    {name = "All the others in DeepH team", email = "deeph-pack@outlook.com"},
+    {name = "DeepH team", email = "deeph-pack@outlook.com"},
 ]
 description = "DeepH-pack dock that designed for DeepH-pack data preparation."
 readme = "README.md"
