@@ -7,10 +7,15 @@
 
 ### Integrating deep learning into first-principles calculations
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
-[![Python 3.13](https://img.shields.io/badge/python-3.13-blue.svg)](https://www.python.org/)
+[![License](https://img.shields.io/pypi/l/deepx-dock.svg)](https://pypi.org/project/deepx-dock/)
+[![Documentation Status](https://readthedocs.org/projects/deeph-dock/badge/?version=latest)](https://deeph-dock.readthedocs.io/en/latest/?badge=latest)
 [![GitHub Issues](https://img.shields.io/github/issues/kYangLi/DeepH-dock.svg)](https://github.com/kYangLi/DeepH-dock/issues)
 [![GitHub Stars](https://img.shields.io/github/stars/kYangLi/DeepH-dock.svg?style=social)](https://github.com/kYangLi/DeepH-dock/stargazers)
+
+[![GitHub Actions PyPI Release](https://github.com/kYangLi/DeepH-dock/actions/workflows/publish.yaml/badge.svg)](https://github.com/kYangLi/DeepH-dock/actions/workflows/publish.yaml)
+[![PyPI Version](https://img.shields.io/pypi/v/deepx-dock.svg)](https://pypi.org/project/deepx-dock/)
+[![Python 3.13](https://img.shields.io/badge/python-3.13-blue.svg)](https://www.python.org/)
+
 
 *Modular, extensible bridge between first-principles calculations and the DeepH method*
 </div>
