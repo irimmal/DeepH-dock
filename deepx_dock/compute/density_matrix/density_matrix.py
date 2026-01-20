@@ -16,9 +16,6 @@ class DensityMatrixObj(AOMatrixObj):
     @property
     def rho_R(self):
         return self.mats
-
-    
-
     
 
 class DensityMatrixGenerator(FermiEnergyAndDOSGenerator):
