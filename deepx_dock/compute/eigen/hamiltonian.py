@@ -652,6 +652,9 @@ class AOWfnObj:
             f.create_dataset('wfnao', data=self.wfnao)
             f.create_dataset('el', data=self.el)
             f.create_dataset('efermi', data=self.efermi)
+
+    def to_dm(self, representation='k'):
+        pass
             
 """
 Aside: WfnAO object in the BSE program Pykernel (wfnao has shape (nk, nb, norb), and el has shape (nk, nb)):
